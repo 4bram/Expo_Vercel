@@ -1,95 +1,190 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# API de Tareas con Next.js, Supabase y Vercel
 
-## Getting Started
+Aplicación web de tareas desarrollada con Next.js, conectada a una base de datos PostgreSQL mediante Supabase y preparada para su despliegue automático mediante Vercel.
 
-First, run the development server:
+El proyecto implementa una API REST con operaciones CRUD y una interfaz web que permite visualizar las tareas y las peticiones realizadas a la API.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Este repositorio será utilizado como base para realizar una práctica sobre despliegue de aplicaciones web, Preview Deployments y Continuous Deployment utilizando Git, GitHub y Vercel.
+
+---
+
+# 1. Descripción del proyecto
+
+La aplicación permite administrar una lista de tareas mediante las siguientes operaciones:
+
+- Consultar tareas.
+- Crear tareas.
+- Marcar tareas como completadas.
+- Editar tareas.
+- Eliminar tareas.
+- Consultar las peticiones y respuestas realizadas desde la interfaz.
+
+La arquitectura general del proyecto es la siguiente:
+
+```text
+Usuario / Navegador
+        |
+        v
+Aplicación Next.js
+        |
+        v
+    API REST
+        |
+        v
+    Supabase
+        |
+        v
+   PostgreSQL
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Posteriormente, la aplicación será publicada mediante Vercel utilizando un repositorio de GitHub.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+Desarrollador
+      |
+      | git push
+      v
+   GitHub
+      |
+      v
+   Vercel
+      |
+      v
+Aplicación publicada
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 2. Tecnologías utilizadas
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-
-# API de tareas con Next.js, Supabase y Vercel
-
-API REST de tareas (CRUD) hecha con Next.js, con base de datos en Supabase y deploy automático en Vercel. Incluye una interfaz web con una consola que muestra las peticiones y respuestas en vivo.
-
-Sirve como base para practicar el flujo completo: ramas de desarrollo en Git, base de datos en la nube y despliegue automático.
-
-## Tecnologías
-
-| Tecnología | Para qué se usa |
+| Tecnología | Función |
 |---|---|
-| Next.js | Framework: la interfaz y las rutas de la API |
-| Supabase | Base de datos PostgreSQL en la nube |
-| Vercel | Hosting y deploy automático desde GitHub |
-| Git y GitHub | Control de versiones y ramas |
+| Next.js | Framework utilizado para la interfaz y las rutas de la API |
+| Node.js | Entorno de ejecución |
+| NPM | Administración de dependencias |
+| Supabase | Servicios backend y acceso a PostgreSQL |
+| PostgreSQL | Persistencia de las tareas |
+| Git | Control de versiones |
+| GitHub | Repositorio remoto |
+| Vercel | Despliegue y publicación automática de la aplicación |
 
-## Estructura del proyecto
+---
 
-```
+# 3. Estructura del proyecto
+
+La estructura principal del repositorio es la siguiente:
+
+```text
 Expo_Vercel/
 ├── app/
-│   ├── page.js                  ← interfaz de tareas y consola de peticiones
+│   ├── page.js
+│   │
 │   └── api/
-│       ├── salud/route.js       ← GET: prueba la conexión con Supabase
+│       ├── salud/
+│       │   └── route.js
+│       │
 │       └── tareas/
-│           ├── route.js         ← GET y POST
-│           └── [id]/route.js    ← PUT y DELETE
+│           ├── route.js
+│           │
+│           └── [id]/
+│               └── route.js
+│
 ├── lib/
-│   └── supabase.js              ← conexión a Supabase (se crea una sola vez)
-├── .env.example                 ← nombres de las variables, sin valores
-└── package.json
+│   └── supabase.js
+│
+├── .env.example
+├── package.json
+└── README.md
 ```
 
-Los archivos `AGENTS.md` y `CLAUDE.md` los genera `create-next-app` y no afectan el proyecto.
+### Archivos principales
 
-## Requisitos
+| Archivo | Función |
+|---|---|
+| `app/page.js` | Interfaz de tareas y consola de peticiones |
+| `app/api/salud/route.js` | Comprueba la conexión con Supabase |
+| `app/api/tareas/route.js` | Implementa GET y POST |
+| `app/api/tareas/[id]/route.js` | Implementa PUT y DELETE |
+| `lib/supabase.js` | Configura la conexión con Supabase |
+| `.env.example` | Define los nombres de las variables necesarias |
+| `package.json` | Dependencias y scripts del proyecto |
 
-- Node.js 20 o superior
-- Git
-- Cuenta en GitHub, Supabase y Vercel (los tres tienen plan gratuito)
+Los archivos adicionales generados automáticamente por `create-next-app` forman parte de la configuración del proyecto y no requieren modificaciones para realizar esta práctica.
 
-## Paso 1: Clonar e instalar
+---
+
+# 4. Requisitos
+
+Antes de comenzar verifica que tu equipo tenga instalado:
+
+- Node.js 20 o superior.
+- NPM.
+- Git.
+- Visual Studio Code o algún editor de código.
+
+También será necesario contar con:
+
+- Una cuenta de GitHub.
+- Una cuenta de Supabase.
+- Una cuenta de Vercel.
+
+Puedes verificar las herramientas instaladas mediante:
+
+```bash
+node --version
+npm --version
+git --version
+```
+
+Si los comandos muestran correctamente las versiones instaladas, puedes continuar.
+
+---
+
+# 5. Preparación del entorno
+
+Antes de comenzar la práctica de Vercel se deberá preparar y comprobar el funcionamiento de la aplicación de manera local.
+
+---
+
+## 5.1 Clonar el repositorio
+
+Clona el repositorio proporcionado para la práctica:
 
 ```bash
 git clone https://github.com/4bram/Expo_Vercel.git
+```
+
+Ingresa al directorio:
+
+```bash
 cd Expo_Vercel
+```
+
+Instala las dependencias:
+
+```bash
 npm install
 ```
 
-## Paso 2: Crear tu base de datos en Supabase
+Una vez finalizada la instalación, el proyecto estará disponible localmente.
 
-Cada persona usa su propio proyecto de Supabase.
+---
 
-1. En supabase.com crea un proyecto nuevo y guarda la contraseña de la base de datos.
-2. Abre SQL Editor, pega esto y da Run:
+## 5.2 Crear un proyecto en Supabase
+
+Cada alumno deberá utilizar su propio proyecto de Supabase.
+
+Ingresa a Supabase y crea un nuevo proyecto.
+
+Espera a que termine el proceso de configuración antes de continuar.
+
+Una vez creado, abre:
+
+```text
+SQL Editor
+```
+
+Crea una nueva consulta y ejecuta:
 
 ```sql
 create table public.tareas (
@@ -102,129 +197,957 @@ create table public.tareas (
 alter table public.tareas enable row level security;
 
 insert into public.tareas (titulo)
-values ('Aprender Vercel'), ('Aprender Supabase');
+values
+('Aprender Vercel'),
+('Aprender Supabase');
 ```
 
-3. Ve a Project Settings → API Keys y copia dos datos:
-   - Project URL (algo como `https://xxxx.supabase.co`)
-   - Secret key (empieza con `sb_secret_`; si ves llaves legacy, es la `service_role`)
+Esto creará la tabla `tareas` con la siguiente estructura:
 
-Importante: usa la secret key, no la publishable. La tabla tiene RLS activado, y con la llave pública la API devuelve una lista vacía sin marcar error.
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | bigint | Identificador único |
+| `titulo` | text | Descripción de la tarea |
+| `completada` | boolean | Estado de la tarea |
+| `created_at` | timestamptz | Fecha y hora de creación |
 
-## Paso 3: Variables de entorno
+También se crearán dos registros iniciales:
 
-Copia el archivo de ejemplo con el nombre `.env.local`:
+```text
+Aprender Vercel
+Aprender Supabase
+```
+
+---
+
+## 5.3 Obtener las credenciales de Supabase
+
+Dentro de la configuración de tu proyecto de Supabase localiza la información de la API.
+
+Se necesitarán:
+
+```text
+Project URL
+Secret key
+```
+
+La aplicación utiliza estas variables:
+
+```env
+SUPABASE_URL=
+SUPABASE_KEY=
+```
+
+Para este proyecto se utiliza la Secret key del lado del servidor.
+
+No utilices la Publishable key para esta configuración, ya que la tabla tiene Row Level Security habilitado y las rutas del proyecto están preparadas para trabajar del lado servidor con la Secret key.
+
+### Importante
+
+La Secret key es una credencial privada.
+
+Nunca debe:
+
+- Subirse a GitHub.
+- Escribirse directamente en el código.
+- Colocarse en componentes ejecutados en el navegador.
+- Aparecer en capturas.
+- Compartirse públicamente.
+
+---
+
+## 5.4 Configurar las variables de entorno
+
+En la raíz del proyecto encontrarás:
+
+```text
+.env.example
+```
+
+Crea una copia llamada:
+
+```text
+.env.local
+```
+
+### Windows PowerShell
+
+```powershell
+copy .env.example .env.local
+```
+
+### Linux, WSL o macOS
 
 ```bash
-# Windows (PowerShell)
-copy .env.example .env.local
-
-# Mac / Linux
 cp .env.example .env.local
 ```
 
-Ábrelo y llena tus datos, sin comillas ni espacios:
+Abre `.env.local` y agrega los valores correspondientes a tu proyecto:
 
-```
+```env
 SUPABASE_URL=https://TU-PROYECTO.supabase.co
 SUPABASE_KEY=sb_secret_tu_llave
 ```
 
-`.env.local` está ignorado por Git, así que no se sube a GitHub.
+Guarda el archivo.
 
-## Paso 4: Ejecutar en local
+`.env.local` está ignorado por Git, por lo que no deberá enviarse al repositorio.
+
+Si modificas posteriormente las variables de entorno, detén el servidor con:
+
+```text
+Ctrl + C
+```
+
+y vuelve a ejecutarlo.
+
+---
+
+## 5.5 Ejecutar la aplicación localmente
+
+Inicia el servidor de desarrollo:
 
 ```bash
 npm run dev
 ```
 
-Abre `http://localhost:3000`. Si cambias `.env.local`, detén el servidor con Ctrl+C y vuelve a correr `npm run dev`, porque las variables solo se leen al arrancar.
+Abre desde el navegador:
 
-## Rutas de la API
+```text
+http://localhost:3000
+```
 
-| Método | Ruta | Qué hace |
+Si la conexión con Supabase funciona correctamente deberán aparecer las tareas:
+
+```text
+Aprender Vercel
+Aprender Supabase
+```
+
+---
+
+# 6. Funcionamiento de la API
+
+La aplicación contiene una API REST para administrar las tareas.
+
+## Rutas disponibles
+
+| Método | Ruta | Función |
 |---|---|---|
 | GET | `/api/salud` | Verifica la conexión con Supabase |
-| GET | `/api/tareas` | Lista todas las tareas |
-| POST | `/api/tareas` | Crea una tarea. Cuerpo: `{"titulo": "..."}` |
-| PUT | `/api/tareas/:id` | Edita una tarea. Cuerpo: `{"titulo": "...", "completada": true}` |
+| GET | `/api/tareas` | Obtiene todas las tareas |
+| POST | `/api/tareas` | Crea una nueva tarea |
+| PUT | `/api/tareas/:id` | Modifica una tarea |
 | DELETE | `/api/tareas/:id` | Elimina una tarea |
 
-Pruebas en PowerShell (cambia la URL por la tuya):
+### Ejemplo de POST
+
+```json
+{
+  "titulo": "Nueva tarea"
+}
+```
+
+### Ejemplo de PUT
+
+```json
+{
+  "titulo": "Tarea modificada",
+  "completada": true
+}
+```
+
+---
+
+## 6.1 Pruebas opcionales desde PowerShell
+
+También se pueden probar las rutas directamente desde PowerShell.
+
+### Crear una tarea
 
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:3000/api/tareas" -Method Post -ContentType "application/json" -Body '{"titulo":"Nueva tarea"}'
+```
+
+### Actualizar una tarea
+
+```powershell
 Invoke-RestMethod -Uri "http://localhost:3000/api/tareas/3" -Method Put -ContentType "application/json" -Body '{"completada":true}'
+```
+
+### Eliminar una tarea
+
+```powershell
 Invoke-RestMethod -Uri "http://localhost:3000/api/tareas/3" -Method Delete
 ```
 
-## Interfaz y consola de peticiones
+El identificador utilizado deberá cambiarse de acuerdo con los registros existentes en la base de datos.
 
-La página principal (`/`) permite agregar, marcar como completadas y eliminar tareas. Debajo tiene una consola que muestra cada petición que hace la interfaz: la hora, el método, la ruta, el código de estado, el tiempo de respuesta, la solicitud enviada y la respuesta recibida. Con el botón Limpiar se vacía.
+---
 
-Al cargar la página verás un `GET /api/tareas`. Cada acción manda su petición (`POST`, `PUT` o `DELETE`) y luego un `GET` para refrescar la lista.
+# 7. Interfaz y consola de peticiones
 
-## Paso 5: Desplegar en Vercel
+La página principal permite:
 
-1. Sube tu copia del proyecto a tu propio repo de GitHub.
-2. En vercel.com: Add New → Project → importa el repo.
-3. Deja el preset en Next.js y escribe el Project Name en minúsculas.
-4. En Environment Variables agrega `SUPABASE_URL` y `SUPABASE_KEY` con tus valores, en Production and Preview. No actives la integración opcional de Supabase que ofrece Vercel, porque ya configuraste las variables a mano.
-5. Da Deploy.
-6. Confirma en Settings → Environments que Production siga la rama `main`.
+- Consultar las tareas.
+- Crear nuevas tareas.
+- Marcar tareas como completadas.
+- Eliminar tareas.
 
-Desde ese momento, cada `git push` a `main` publica en producción automáticamente. Los pushes a otras ramas generan un preview con URL temporal.
+Debajo de la interfaz se encuentra una consola que permite observar las peticiones realizadas por la aplicación.
 
-Las variables solo se aplican a deploys nuevos. Si las cambias, ve a Deployments → último deploy → menú ⋯ → Redeploy.
+La consola muestra información como:
 
-## Flujo de ramas
+- Hora de la petición.
+- Método HTTP.
+- Ruta.
+- Código de estado.
+- Tiempo de respuesta.
+- Solicitud enviada.
+- Respuesta recibida.
 
-El proyecto se construyó con ramas de desarrollo que se unen en `main`, la rama de deploy automático, sin Pull Requests:
+Al cargar la aplicación se realizará una petición:
 
-| Rama | Qué agrega |
-|---|---|
-| `conexion-supabase` | `lib/supabase.js` y la ruta `/api/salud` |
-| `listar-tareas` | `GET /api/tareas` |
-| `crear-tareas` | `POST /api/tareas` |
-| `editar-eliminar` | `PUT` y `DELETE` en `/api/tareas/[id]` |
-| `interfaz` | Página de tareas |
-| `consola` | Consola de peticiones |
-| `main` | Rama de deploy automático |
+```text
+GET /api/tareas
+```
 
-Ciclo que se repite en cada rama:
+Al realizar operaciones desde la interfaz podrán observarse peticiones como:
+
+```text
+POST /api/tareas
+PUT /api/tareas/3
+DELETE /api/tareas/3
+```
+
+Después de una modificación también se ejecutará nuevamente:
+
+```text
+GET /api/tareas
+```
+
+para actualizar la información mostrada.
+
+---
+
+# Práctica: Despliegue automático con Vercel
+
+# 8. Objetivo de la práctica
+
+Implementar el despliegue de una aplicación Next.js conectada con Supabase utilizando GitHub y Vercel.
+
+Durante la práctica se comprobarán los siguientes conceptos:
+
+- Deployment.
+- Variables de entorno.
+- Production Deployment.
+- Preview Deployment.
+- Integración entre GitHub y Vercel.
+- Continuous Deployment.
+- Persistencia de datos con Supabase.
+
+Al finalizar se deberá haber implementado el siguiente flujo:
+
+```text
+Desarrollador
+      |
+      | git push
+      v
+   GitHub
+      |
+      v
+   Vercel
+      |
+      v
+Aplicación Web
+      |
+      v
+  Supabase
+      |
+      v
+ PostgreSQL
+```
+
+---
+
+# 9. Comprobar la aplicación antes del despliegue
+
+Antes de trabajar con Vercel comprueba nuevamente que la aplicación se ejecute correctamente:
+
+```bash
+npm run dev
+```
+
+Abre:
+
+```text
+http://localhost:3000
+```
+
+Desde la interfaz crea una tarea:
+
+```text
+Realizar práctica de Vercel
+```
+
+Después:
+
+1. Crea la tarea.
+2. Márcala como completada.
+3. Observa las peticiones de la consola.
+4. Elimina una tarea de prueba.
+
+### Evidencia 1
+
+Tomar una captura donde se observe:
+
+- La aplicación funcionando en `localhost`.
+- La lista de tareas.
+- La tarea creada.
+- La consola de peticiones.
+
+---
+
+# 10. Crear un repositorio propio en GitHub
+
+Cada alumno deberá utilizar su propio repositorio para realizar los deployments.
+
+El proyecto clonado mantiene inicialmente la referencia al repositorio original.
+
+Comprueba la configuración:
+
+```bash
+git remote -v
+```
+
+Elimina el repositorio remoto original:
+
+```bash
+git remote remove origin
+```
+
+Comprueba nuevamente:
+
+```bash
+git remote -v
+```
+
+Ahora crea un repositorio vacío en GitHub.
+
+Nombre sugerido:
+
+```text
+practica-vercel
+```
+
+No agregues un nuevo README, `.gitignore` o licencia desde GitHub, debido a que el proyecto ya contiene esos archivos.
+
+Copia la URL de tu repositorio.
+
+Conecta el proyecto:
+
+```bash
+git remote add origin URL_DE_TU_REPOSITORIO
+```
+
+Ejemplo:
+
+```bash
+git remote add origin https://github.com/TU-USUARIO/practica-vercel.git
+```
+
+Verifica:
+
+```bash
+git remote -v
+```
+
+Asegúrate de utilizar `main`:
+
+```bash
+git branch -M main
+```
+
+Sube el proyecto:
+
+```bash
+git push -u origin main
+```
+
+### Evidencia 2
+
+Tomar una captura del repositorio personal en GitHub mostrando los archivos del proyecto.
+
+---
+
+# 11. Importar el proyecto en Vercel
+
+Ingresa a Vercel con tu cuenta.
+
+Selecciona:
+
+```text
+Add New
+>
+Project
+```
+
+Busca el repositorio creado anteriormente:
+
+```text
+practica-vercel
+```
+
+Selecciona:
+
+```text
+Import
+```
+
+Vercel deberá detectar automáticamente:
+
+```text
+Framework Preset: Next.js
+```
+
+Antes de realizar el deployment se deberán configurar las variables de entorno.
+
+---
+
+# 12. Configurar variables de entorno en Vercel
+
+Dentro de la configuración del proyecto localiza:
+
+```text
+Environment Variables
+```
+
+Agrega:
+
+```text
+SUPABASE_URL
+```
+
+y:
+
+```text
+SUPABASE_KEY
+```
+
+Utiliza los mismos valores configurados anteriormente en `.env.local`.
+
+Configura las variables para:
+
+```text
+Production
+Preview
+```
+
+No actives la integración opcional de Supabase ofrecida por Vercel, ya que la conexión del proyecto se configuró manualmente mediante variables de entorno.
+
+### Importante
+
+No tomes capturas donde sean visibles los valores de `SUPABASE_KEY`.
+
+Una vez configuradas las variables selecciona:
+
+```text
+Deploy
+```
+
+Vercel realizará el proceso:
+
+```text
+Código
+  |
+  v
+Instalación de dependencias
+  |
+  v
+Build
+  |
+  v
+Deployment
+  |
+  v
+Ready
+```
+
+### Evidencia 3
+
+Tomar una captura donde se observe que el primer deployment terminó correctamente en Vercel.
+
+---
+
+# 13. Comprobar la aplicación en producción
+
+Cuando finalice el deployment, Vercel proporcionará una URL pública similar a:
+
+```text
+https://practica-vercel-xxxxx.vercel.app
+```
+
+Abre la URL.
+
+Comprueba que las tareas almacenadas en Supabase aparezcan correctamente.
+
+Crea una nueva tarea:
+
+```text
+Aplicación desplegada en Vercel
+```
+
+Comprueba también que sea posible modificar y eliminar tareas.
+
+En este momento el flujo será:
+
+```text
+Usuario
+   |
+   v
+Vercel
+   |
+   v
+Aplicación Next.js
+   |
+   v
+Supabase
+   |
+   v
+PostgreSQL
+```
+
+### Evidencia 4
+
+Tomar una captura de la aplicación funcionando desde la URL pública proporcionada por Vercel.
+
+La URL deberá ser visible en el navegador.
+
+---
+
+# 14. Crear un Preview Deployment
+
+A continuación se comprobará el funcionamiento de los Preview Deployments.
+
+Regresa a la terminal.
+
+Asegúrate de estar en `main`:
 
 ```bash
 git checkout main
-git checkout -b NOMBRE-DE-LA-RAMA
-# ...programas los cambios...
-git add .
-git commit -m "mensaje"
-git push -u origin NOMBRE-DE-LA-RAMA   # genera un preview en Vercel
-git checkout main
-git merge NOMBRE-DE-LA-RAMA
-git push origin main                   # despliega a producción
 ```
 
-Une cada rama a `main` antes de empezar la siguiente, para que no haya conflictos en los archivos compartidos.
+Crea una nueva rama:
 
-## Problemas comunes
+```bash
+git checkout -b cambio-interfaz
+```
 
-| Qué pasa | Causa probable | Solución |
+Comprueba la rama actual:
+
+```bash
+git branch
+```
+
+El resultado deberá ser similar a:
+
+```text
+* cambio-interfaz
+  main
+```
+
+---
+
+# 15. Realizar una modificación
+
+Abre:
+
+```text
+app/page.js
+```
+
+Localiza el título principal de la aplicación y modifícalo para incluir tu nombre.
+
+Ejemplo:
+
+```text
+Práctica Vercel - Hugo Rivera
+```
+
+Guarda los cambios.
+
+Comprueba primero la modificación localmente.
+
+Después ejecuta:
+
+```bash
+git status
+```
+
+Agrega los cambios:
+
+```bash
+git add .
+```
+
+Crea el commit:
+
+```bash
+git commit -m "Personalizar interfaz"
+```
+
+Sube únicamente la nueva rama:
+
+```bash
+git push -u origin cambio-interfaz
+```
+
+No realices todavía un merge con `main`.
+
+---
+
+# 16. Comprobar el Preview Deployment
+
+Ingresa nuevamente al proyecto en Vercel.
+
+Vercel deberá detectar la nueva rama y generar un Preview Deployment.
+
+El flujo será:
+
+```text
+cambio-interfaz
+       |
+       | git push
+       v
+     GitHub
+       |
+       v
+     Vercel
+       |
+       v
+Preview Deployment
+       |
+       v
+ URL temporal
+```
+
+Abre la URL correspondiente al Preview Deployment.
+
+Comprueba que aparezca:
+
+```text
+Práctica Vercel - Tu Nombre
+```
+
+La aplicación principal de producción todavía deberá mostrar la versión anterior.
+
+Esto permite diferenciar los dos entornos:
+
+| Rama | Deployment |
+|---|---|
+| `cambio-interfaz` | Preview |
+| `main` | Production |
+
+### Evidencia 5
+
+Tomar una captura del Preview Deployment mostrando la modificación realizada.
+
+---
+
+# 17. Desplegar automáticamente a producción
+
+Después de comprobar correctamente el Preview Deployment, incorpora los cambios a `main`.
+
+Regresa a la terminal:
+
+```bash
+git checkout main
+```
+
+Fusiona la rama:
+
+```bash
+git merge cambio-interfaz
+```
+
+Envía el cambio:
+
+```bash
+git push origin main
+```
+
+## Importante
+
+Después de ejecutar:
+
+```bash
+git push origin main
+```
+
+no realices un deployment manual desde Vercel.
+
+Ingresa al panel de Vercel y observa el proceso.
+
+Vercel deberá detectar automáticamente el nuevo commit:
+
+```text
+git push
+   |
+   v
+GitHub
+   |
+   v
+Vercel detecta el commit
+   |
+   v
+Build automático
+   |
+   v
+Nuevo deployment
+   |
+   v
+Production actualizada
+```
+
+Este proceso permite comprobar el funcionamiento del despliegue automático.
+
+### Evidencia 6
+
+Tomar una captura del nuevo deployment generado automáticamente después del `git push` a `main`.
+
+---
+
+# 18. Comprobar la nueva versión de producción
+
+Espera hasta que Vercel indique:
+
+```text
+Ready
+```
+
+Abre nuevamente la URL principal de producción.
+
+Ahora deberá aparecer:
+
+```text
+Práctica Vercel - Tu Nombre
+```
+
+El cambio deberá haberse publicado sin realizar manualmente otro deployment.
+
+### Evidencia 7
+
+Tomar una captura de la aplicación de producción mostrando la modificación realizada.
+
+---
+
+# 19. Verificar la persistencia de datos
+
+Desde la aplicación desplegada crea una nueva tarea:
+
+```text
+Deployment automático completado
+```
+
+Marca la tarea como completada.
+
+Después ingresa a Supabase y abre la tabla:
+
+```text
+tareas
+```
+
+Comprueba que el registro se encuentre almacenado.
+
+El flujo realizado será:
+
+```text
+Usuario
+   |
+   v
+Aplicación en Vercel
+   |
+   v
+API Next.js
+   |
+   v
+Supabase
+   |
+   v
+PostgreSQL
+```
+
+### Evidencia 8
+
+Tomar una captura de la tabla `tareas` en Supabase mostrando el registro:
+
+```text
+Deployment automático completado
+```
+
+No mostrar credenciales o claves de Supabase.
+
+---
+
+# 20. Resultado esperado
+
+Al finalizar la práctica se deberán obtener los siguientes resultados:
+
+| Resultado | Estado esperado |
+|---|---|
+| Aplicación ejecutándose localmente | Correcto |
+| Conexión con Supabase | Correcta |
+| CRUD de tareas | Funcional |
+| Repositorio personal en GitHub | Publicado |
+| Primer deployment en Vercel | Correcto |
+| Aplicación pública | Funcional |
+| Preview Deployment | Comprobado |
+| Production Deployment | Comprobado |
+| Continuous Deployment | Comprobado |
+| Persistencia de datos | Comprobada |
+
+El flujo completo será:
+
+```text
+DESARROLLO
+
+Desarrollador
+     |
+     | git commit
+     | git push
+     v
+   GitHub
+     |
+     v
+   Vercel
+     |
+     v
+Deployment
+
+
+APLICACIÓN
+
+Usuario
+   |
+   v
+Aplicación en Vercel
+   |
+   v
+API Next.js
+   |
+   v
+Supabase
+   |
+   v
+PostgreSQL
+```
+
+---
+
+# 21. Evidencias requeridas
+
+| No. | Evidencia |
+|---:|---|
+| 1 | Aplicación funcionando localmente y consola de peticiones |
+| 2 | Repositorio personal publicado en GitHub |
+| 3 | Primer deployment exitoso en Vercel |
+| 4 | Aplicación funcionando desde la URL pública |
+| 5 | Preview Deployment de la rama `cambio-interfaz` |
+| 6 | Deployment automático después del `git push` a `main` |
+| 7 | Aplicación de producción mostrando la modificación |
+| 8 | Registro final almacenado correctamente en Supabase |
+
+---
+
+# 22. Entregable
+
+Realizar un reporte en formato PDF que incluya:
+
+1. Portada.
+2. Objetivo de la práctica.
+3. Introducción breve sobre Vercel.
+4. Desarrollo de la práctica.
+5. Las 8 evidencias solicitadas.
+6. Descripción breve de cada evidencia.
+7. Conclusión.
+8. URL del repositorio personal de GitHub.
+9. URL de la aplicación desplegada en Vercel.
+
+---
+
+# 23. Problemas comunes
+
+| Problema | Causa probable | Solución |
 |---|---|---|
-| La lista sale vacía (`[]`) y no hay error | Estás usando la llave pública | Usa la secret key (`sb_secret_...`) |
-| Error de variable faltante al correr en local | No existe `.env.local` o está mal escrito | Revisa que esté en la raíz, junto a `package.json` |
-| Cambié la llave y sigue igual | El servidor o el deploy no se reiniciaron | Reinicia `npm run dev` o haz Redeploy en Vercel |
-| `PUT` o `DELETE` responde 500 con `"undefined"` | La carpeta de la ruta no se llama `[id]` | Renómbrala a `[id]`, con los corchetes |
-| Error al correr la página | Hay un `page.tsx` y un `page.js` a la vez | Borra `app/page.tsx` |
-| Vercel muestra la página de ejemplo de Next.js | Estás viendo producción antes del merge a `main` | Une la rama a `main` y haz push |
-| El preview pide iniciar sesión | Vercel protege los previews por defecto | Entra con tu cuenta de Vercel |
+| La lista aparece vacía `[]` | Se utilizó una llave incorrecta | Verifica la `SUPABASE_KEY` |
+| Error de variable faltante | `.env.local` no existe o está mal configurado | Comprueba que se encuentre junto a `package.json` |
+| Se modificó una variable pero continúa el error | El servidor no se reinició | Detén y ejecuta nuevamente `npm run dev` |
+| Vercel sigue utilizando una variable anterior | El deployment se generó antes del cambio | Realiza un Redeploy |
+| PUT o DELETE responde con error | La ruta `[id]` no está configurada correctamente | Verifica `app/api/tareas/[id]/route.js` |
+| La aplicación muestra la página inicial de Next.js | Se está desplegando una versión incorrecta | Comprueba la rama y los commits enviados |
+| El Preview solicita iniciar sesión | El deployment está protegido por Vercel | Inicia sesión con tu cuenta |
+| El deployment falla | Error durante el build | Revisa los logs del deployment en Vercel |
+| La aplicación funciona localmente pero no en Vercel | Faltan variables de entorno | Verifica `SUPABASE_URL` y `SUPABASE_KEY` en Vercel |
 
-## Seguridad
+---
 
-- No subas nunca tus llaves a GitHub ni las pegues en capturas o chats. La secret key da acceso completo a tu base de datos.
-- Si una llave se expone, regenérala en Supabase y actualiza la variable en `.env.local` y en Vercel.
-- Esta API no tiene autenticación: cualquiera que conozca la URL puede leer y modificar las tareas. Está pensada solo para aprender, así que no la uses con datos reales.
+# 24. Seguridad
 
-## Nota sobre el lenguaje
+Durante toda la práctica deberán respetarse las siguientes indicaciones:
 
-El proyecto se creó con `create-next-app`, que genera archivos de TypeScript (como `layout.tsx`). El código de la API y de la interfaz está en JavaScript, y Next.js acepta ambos lenguajes en el mismo proyecto.
+- Nunca subir `.env.local` a GitHub.
+- Nunca publicar `SUPABASE_KEY`.
+- No colocar credenciales directamente en el código.
+- No mostrar claves o contraseñas en capturas.
+- Revisar los archivos antes de ejecutar `git add .`.
+- No utilizar datos personales o sensibles en esta aplicación.
+- Si una clave se expone accidentalmente, deberá regenerarse en Supabase y actualizarse localmente y en Vercel.
+
+La API utilizada en esta práctica no implementa autenticación de usuarios y está diseñada únicamente con fines educativos.
+
+---
+
+# 25. Flujo de ramas utilizado en el desarrollo del proyecto
+
+El proyecto original fue construido utilizando diferentes ramas de desarrollo que posteriormente se integraron en `main`.
+
+| Rama | Funcionalidad desarrollada |
+|---|---|
+| `conexion-supabase` | Conexión con Supabase y `/api/salud` |
+| `listar-tareas` | `GET /api/tareas` |
+| `crear-tareas` | `POST /api/tareas` |
+| `editar-eliminar` | `PUT` y `DELETE` |
+| `interfaz` | Interfaz gráfica |
+| `consola` | Consola de peticiones |
+| `main` | Versión integrada y rama de producción |
+
+Este flujo corresponde al proceso utilizado para desarrollar el proyecto base.
+
+Durante la práctica no será necesario reconstruir estas ramas. Únicamente se utilizará la rama `cambio-interfaz` para comprobar el funcionamiento de los Preview Deployments.
+
+---
+
+# 26. Nota sobre el lenguaje
+
+El proyecto fue creado utilizando `create-next-app`.
+
+Algunos archivos generados automáticamente por Next.js utilizan TypeScript, por ejemplo:
+
+```text
+layout.tsx
+```
+
+El código principal de la API y de la interfaz utilizado en esta práctica está desarrollado en JavaScript.
+
+Next.js permite utilizar JavaScript y TypeScript dentro de un mismo proyecto.
+
+---
+
+# 28. Referencias
+
+- Next.js Documentation: https://nextjs.org/docs
+- Vercel Documentation: https://vercel.com/docs
+- Vercel Deployments: https://vercel.com/docs/deployments
+- Vercel Git Integrations: https://vercel.com/docs/git
+- Vercel Environments: https://vercel.com/docs/deployments/environments
+- Supabase Documentation: https://supabase.com/docs
